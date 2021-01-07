@@ -7,8 +7,10 @@
     </b-nav-form>
     <!-- <div v-for class="single-blog"></div> -->
     <div v-for="(blog, index) in filteredBlogs" :key="index" class="single-blog">
-        <h2>{{ blog.title | to-uppercase}}</h2>
-        <article>{{ blog.body | snippet }}</article>
+        <router-link v-bind:to="'/blog/' + blog.id">
+            <h2>{{ blog.title | to-uppercase}}</h2>
+        </router-link>
+        <article>{{ blog.content | snippet }}</article>
     </div>
 </div>
 </template>
@@ -22,16 +24,36 @@ export default {
         };
     },
     methods: {},
+    // created() {
+    //     this.$http
+    //         .get("https://jsonplaceholder.typicode.com/posts", {
+    //             // title: this.blog.title,
+    //             // body: this.blog.content,
+    //             // userId: 1,
+    //         })
+    //         .then(function (data) {
+    //             console.log(data);
+    //             this.blogs = data.body.slice(0, 50);
+    //         });
+    // },
     created() {
         this.$http
-            .get("https://jsonplaceholder.typicode.com/posts", {
-                // title: this.blog.title,
-                // body: this.blog.content,
-                // userId: 1,
+            .get("https://blog-vue-test-ae254.firebaseio.com/posts.json")
+            // title: this.blog.title,
+            // body: this.blog.content,
+            // userId: 1,
+            // })
+            .then(function (data) {
+                return data.json();
             })
             .then(function (data) {
-                console.log(data);
-                this.blogs = data.body.slice(0, 50);
+                var blogsArray = [];
+                for (let key in data) {
+                    data[key].id = key;
+                    blogsArray.push(data[key]);
+                }
+                this.blogs = blogsArray;
+                console.log(blogsArray);
             });
     },
     computed: {

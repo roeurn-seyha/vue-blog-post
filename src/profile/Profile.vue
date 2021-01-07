@@ -5,11 +5,12 @@
             <img src="../assets/ava.png" alt="avatar" />
         </center>
         <hr />
-        <div class="name">រឿន សីហា</div>
-        <p class="subtitle">និស្សិត</p>
+        <div class="name">Roeurn Seyha</div>
+        <p class="subtitle">IT Year 3 Student</p>
         <p class="location">
             <i class="fa fa-map-marker"></i>
-            <a href="http://www.canaraengineering.in/" target="_blank">Canara Engineering College</a>
+            <!-- <a href="#" target="_blank">View Profile</a> -->
+            <router-link to="/viewprofile">View Profile</router-link>
         </p>
         <p class="icons animated pulse">
             <a href="https://twitter.com/shrinath_nayak" target="_blank">

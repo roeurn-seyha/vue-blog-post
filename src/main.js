@@ -8,6 +8,10 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.config.productionTip = false
 
+// Languge
+import VueI18n from 'vue-i18n'
+import { i18n } from './plugins/i18n'
+
 // Font Awsome Icon
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
@@ -20,11 +24,16 @@ import Product from './Product.vue'
 import addBlog from './blogs/addBlog.vue'
 import Profile from './profile/Profile.vue'
 import showBlog from './blogs/showBlog.vue'
+import singleBlog from './blogs/singleBlog.vue'
+import viewProfile from './profile/viewProfile.vue'
 import VueResource from 'vue-resource'
 // Vue Icon
 library.add(faUserSecret)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.config.productionTip = false
+
+// Vue i18n
+Vue.use(VueI18n)
 // Vue Resource
 Vue.use(VueResource)
 Vue.use(VueRouter);
@@ -34,7 +43,10 @@ const routes = [
   { path: '/product', component: Product },
   { path: '/addBlog', component: addBlog },
   { path: '/profile', component: Profile },
-  { path: '/showblog', component: showBlog }
+  { path: '/showblog', component: showBlog },
+  { path: '/blog/:id', component: singleBlog },
+  { path: '/viewprofile', component: viewProfile },
+
 ];
 
 const router = new VueRouter({
@@ -53,5 +65,6 @@ Vue.filter('snippet', function (value) {
 new Vue({
   el:'#app',
   router,
+  i18n,
   render: h => h(App),
 }).$mount('#app')
